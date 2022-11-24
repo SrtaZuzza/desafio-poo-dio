@@ -1,6 +1,10 @@
 package br.com.dio.desafio.dominio;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 
 public class Dev {
     private String nome;
@@ -12,14 +16,17 @@ public class Dev {
         bootcamp.getDevsInscritos().add(this);
     }
 
-    public void progredir() {
-        Optional<Conteudo> conteudo = this.conteudosInscritos.stream().findFirst();
-        if(conteudo.isPresent()) {
-            this.conteudosConcluidos.add(conteudo.get());
-            this.conteudosInscritos.remove(conteudo.get());
-        } else {
-            System.err.println("Você não está matriculado em nenhum conteúdo!");
+    public void progredir(int etapas) {
+        for (int i = 0; i < etapas; i++) {
+            Optional<Conteudo> conteudo = this.conteudosInscritos.stream().findFirst();
+            if(conteudo.isPresent()) {
+                this.conteudosConcluidos.add(conteudo.get());
+                this.conteudosInscritos.remove(conteudo.get());
+            } else {
+                System.err.println(nome + " não fez matrícula em nenhum conteúdo!");
+            }
         }
+        System.out.println("\n" + nome + " progrediu " + etapas + " conteúdos!\n");
     }
 
     public double calcularTotalXp() {

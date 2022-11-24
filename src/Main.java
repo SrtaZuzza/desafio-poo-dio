@@ -1,9 +1,9 @@
+import java.time.LocalDate;
+
 import br.com.dio.desafio.dominio.Bootcamp;
 import br.com.dio.desafio.dominio.Curso;
 import br.com.dio.desafio.dominio.Dev;
 import br.com.dio.desafio.dominio.Mentoria;
-
-import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
@@ -36,28 +36,19 @@ public class Main {
         Dev devCamila = new Dev();
         devCamila.setNome("Camila");
         devCamila.inscreverBootcamp(bootcamp);
-        System.out.println("Conteúdos Inscritos Camila:" + devCamila.getConteudosInscritos());
-        devCamila.progredir();
-        devCamila.progredir();
-        System.out.println("-");
-        System.out.println("Conteúdos Inscritos Camila:" + devCamila.getConteudosInscritos());
-        System.out.println("Conteúdos Concluídos Camila:" + devCamila.getConteudosConcluidos());
-        System.out.println("XP:" + devCamila.calcularTotalXp());
-
-        System.out.println("-------");
+        checkStatus(devCamila, 2);
 
         Dev devJoao = new Dev();
         devJoao.setNome("Joao");
         devJoao.inscreverBootcamp(bootcamp);
-        System.out.println("Conteúdos Inscritos João:" + devJoao.getConteudosInscritos());
-        devJoao.progredir();
-        devJoao.progredir();
-        devJoao.progredir();
-        System.out.println("-");
-        System.out.println("Conteúdos Inscritos João:" + devJoao.getConteudosInscritos());
-        System.out.println("Conteúdos Concluidos João:" + devJoao.getConteudosConcluidos());
-        System.out.println("XP:" + devJoao.calcularTotalXp());
-
+        checkStatus(devJoao, 3);
     }
 
+    public static void checkStatus(Dev developer, int progress) {
+        System.out.println("\n" + developer.getNome() + " - Conteúdos Inscritos: " + developer.getConteudosInscritos());
+        developer.progredir(progress);
+        System.out.println(developer.getNome() + " - Conteúdos Inscritos: " + developer.getConteudosInscritos());
+        System.out.println(developer.getNome() + " - Conteúdos Concluídos: " + developer.getConteudosConcluidos());
+        System.out.println("XP:" + developer.calcularTotalXp());
+    }
 }
