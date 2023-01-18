@@ -8,23 +8,13 @@ import br.com.dio.desafio.dominio.Mentoria;
 public class Main {
     public static void main(String[] args) {
         Curso curso1 = new Curso();
-        curso1.setTitulo("curso java");
-        curso1.setDescricao("descrição curso java");
-        curso1.setCargaHoraria(8);
+        setLessonParams(curso1, "curso java", "descrição curso java", 8);
 
         Curso curso2 = new Curso();
-        curso2.setTitulo("curso js");
-        curso2.setDescricao("descrição curso js");
-        curso2.setCargaHoraria(4);
+        setLessonParams(curso1, "curso js", "descrição curso js", 4);
 
         Mentoria mentoria = new Mentoria();
-        mentoria.setTitulo("mentoria de java");
-        mentoria.setDescricao("descrição mentoria java");
-        mentoria.setData(LocalDate.now());
-
-        /*System.out.println(curso1);
-        System.out.println(curso2);
-        System.out.println(mentoria);*/
+        setMentoringParams(mentoria, "mentoria de java", "descrição mentoria java", LocalDate.now());
 
         Bootcamp bootcamp = new Bootcamp();
         bootcamp.setNome("Bootcamp Java Developer");
@@ -34,14 +24,29 @@ public class Main {
         bootcamp.getConteudos().add(mentoria);
 
         Dev devCamila = new Dev();
-        devCamila.setNome("Camila");
-        devCamila.inscreverBootcamp(bootcamp);
+        setDevParams(devCamila, "Camila", bootcamp);
         checkStatus(devCamila, 2);
 
         Dev devJoao = new Dev();
-        devJoao.setNome("Joao");
-        devJoao.inscreverBootcamp(bootcamp);
+        setDevParams(devJoao, "Joao", bootcamp);
         checkStatus(devJoao, 3);
+    }
+
+    public static void setLessonParams(Curso course, String title, String description, int duration){
+        course.setTitulo(title);
+        course.setDescricao(description);
+        course.setCargaHoraria(duration);
+    }
+
+    public static void setMentoringParams(Mentoria mentoring, String title, String description, LocalDate date){
+        mentoring.setTitulo(title);
+        mentoring.setDescricao(description);
+        mentoring.setData(date);
+    }
+
+    public static void setDevParams(Dev developer, String nome, Bootcamp formacao) {
+        developer.setNome(nome);
+        developer.inscreverBootcamp(formacao);
     }
 
     public static void checkStatus(Dev developer, int progress) {
